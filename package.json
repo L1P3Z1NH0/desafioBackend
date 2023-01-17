@@ -1,0 +1,18 @@
+{
+  "dependencies": {
+    "axios": "^0.21.1",
+    "json-server": "^0.17.1",
+    "mongoose": "^6.8.4"
+  },
+  "name": "desafiobackend",
+  "version": "1.0.0",
+  "main": "DesafioBackend.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node DesafioBackend.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
