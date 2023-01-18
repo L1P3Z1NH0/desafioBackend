@@ -1,7 +1,6 @@
 const axios = require("axios").default;
-// const connectDatabase = require('./database/db')
 
-// const pedidoService = require('./services/pedido.service')
+const pedidoService = require('./services/pedido.service')
 
 const API_PATH_PIPEDRIVE = "https://kruzer.pipedrive.com/api/v1";
 const API_TOKEN_PIPEDRIVE = "519ce9d62044af5ca7eae8b8daa4c01a04ae4459";
@@ -46,12 +45,9 @@ const generateCPF = () => {
     }, "");
 };
 
-
-
 (async () => {
   try {
-    // connectDatabase()
-
+    
     const resGetDeals = await axios.get(
       `${API_PATH_PIPEDRIVE}/deals/?api_token=${API_TOKEN_PIPEDRIVE}&status=won`
     );
@@ -102,32 +98,31 @@ const generateCPF = () => {
         `;
     });
     
+    // const getResPedidoCompra = await axios.get(
+    //     `${API_PATH_BLING}/pedidoscompra/json/?apikey=${API_TOKEN_BLING}`
+    //   );
 
-    const getResPedidoCompra = await axios.get(
-        `${API_PATH_BLING}/pedidoscompra/json/?apikey=${API_TOKEN_BLING}`
-      );
-
-    const pedidoCompras = getResPedidoCompra.data.retorno.pedidoscompra;
+    // const pedidoCompras = getResPedidoCompra.data.retorno.pedidoscompra;
     
-    const pedidoDataValor = pedidoCompras.map(
-        (elemen) =>{
-            dataValor ={
-                data: elemen.pedidocompra
-            }
+    // const pedidoDataValor = pedidoCompras.map(
+    //     (elemen) =>{      
+    //       arrayElement = []
+    //         for (let i = 0; i < elemen.length; i++) {
+    //           arrayElement.push(elemen[i].pedidocompra.datacompra)
+    //         }
+    //         return arrayElement
+    //     }
+    // )
 
-            return dataValor
-        }
-    )
+    // console.log('pedidoCompras :>> ', JSON.stringify(pedidoCompras, null, 4) );
 
-    console.log('pedidoCompras :>> ', JSON.stringify(pedidoCompras, null, 4) );
-    // console.log('pedidoDataValor :>> ', pedidoDataValor);
+    // console.log('pedidoDataValor :>> ', JSON.stringify(pedidoDataValor, null, 4) );
 
-    // for (let index = 0; index < objGanhos.length; index++) {
-    //   const resPostContato = await axios.post(`${API_PATH_BLING}/contato/?apikey=${API_TOKEN_BLING}&xml=${contatos[index]}`);
-    //   const resPostPedido = await axios.post(`${API_PATH_BLING}/pedidocompra/?apikey=${API_TOKEN_BLING}&xml=${pedidos[index]}`);
-    //   const pedido = pedidoService.create()
-    // }
-
+    for (let index = 0; index < objGanhos.length; index++) {
+      const resPostContato = await axios.post(`${API_PATH_BLING}/contato/?apikey=${API_TOKEN_BLING}&xml=${contatos[index]}`);
+      const resPostPedido = await axios.post(`${API_PATH_BLING}/pedidocompra/?apikey=${API_TOKEN_BLING}&xml=${pedidos[index]}`);
+      const pedido = await pedidoService.create(objGanhos[index])
+    }
 
   } catch (error) {
     console.error(error);

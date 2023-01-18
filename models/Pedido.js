@@ -1,4 +1,4 @@
-const { default: mongoose } = require("mongoose");
+const mongoose  = require("mongoose");
 
 const PedidoSchema = new mongoose.Schema({
     nome:{
@@ -6,20 +6,20 @@ const PedidoSchema = new mongoose.Schema({
         required:true
     },
     cpf:{
-        type:Number,
+        type:String,
         required:true,
         unique:true
-    },
-    data:{
-        type:Date,
-        required:true
-    },
-    valor:{
-        type:Number,
-        required:true
     }
 })
+// data:{
+//     type:Date,
+//     required:true
+// },
+// valor:{
+//     type:Number,
+//     required:true
+// }
 
-const Pedido =  mongoose.Schema("Pedido", PedidoSchema)
+const Pedido =  mongoose.model("Pedido", PedidoSchema)
 
 module.exports = Pedido
